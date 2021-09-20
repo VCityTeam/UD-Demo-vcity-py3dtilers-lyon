@@ -1,138 +1,91 @@
 /** @format */
+import { Templates, Widgets, itowns, THREE } from 'ud-viz';
 
-import * as udviz from 'ud-viz';
+const app = new Templates.AllWidget();
+const boundingVolumeBox = new THREE.Box3();
+const boundingVolumeSphere = new THREE.Sphere();
+var isReversed = false;
 
-const app = new udviz.Templates.AllWidget();
-
-app.start('../assets/config/config.json').then((config) => {
-  app.addBaseMapLayer();
-
-  app.addElevationLayer();
-
-  app.setupAndAdd3DTilesLayers();
-
-  ////// REQUEST SERVICE
-  const requestService = new udviz.Components.RequestService();
-
-  ////// ABOUT MODULE
-  const about = new udviz.Widgets.AboutWindow();
-  app.addModuleView('about', about);
-
-  ////// HELP MODULE
-  const help = new udviz.Widgets.HelpWindow(config.helpWindow);
-  app.addModuleView('help', help);
-
-  ////// AUTHENTICATION MODULE
-  const authenticationService =
-    new udviz.Widgets.Extensions.AuthenticationService(
-      requestService,
-      app.config
+// This method was created by iTowns
+// https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js#L257
+const computeNodeSSE = (camera, node) => {
+  node.distance = 0;
+  if (node.boundingVolume.region) {
+    boundingVolumeBox.copy(node.boundingVolume.region.box3D);
+    boundingVolumeBox.applyMatrix4(node.boundingVolume.region.matrixWorld);
+    node.distance = boundingVolumeBox.distanceToPoint(camera.camera3D.position);
+  } else if (node.boundingVolume.box) {
+    boundingVolumeBox.copy(node.boundingVolume.box);
+    boundingVolumeBox.applyMatrix4(node.matrixWorld);
+    node.distance = boundingVolumeBox.distanceToPoint(camera.camera3D.position);
+  } else if (node.boundingVolume.sphere) {
+    boundingVolumeSphere.copy(node.boundingVolume.sphere);
+    boundingVolumeSphere.applyMatrix4(node.matrixWorld);
+    node.distance = Math.max(
+      0.0,
+      boundingVolumeSphere.distanceToPoint(camera.camera3D.position)
     );
+  } else {
+    return Infinity;
+  }
+  if (node.distance === 0) {
+    return Infinity;
+  }
+  return camera._preSSE * (node.geometricError / node.distance);
+};
 
-  const authenticationView = new udviz.Widgets.Extensions.AuthenticationView(
-    authenticationService
-  );
-  app.addModuleView('authentication', authenticationView, {
-    type: udviz.Templates.AllWidget.AUTHENTICATION_MODULE,
-  });
+const reverseSubdivision = (context, layer, node) => {
+  if (layer.tileset.tiles[node.tileId].children === undefined) {
+    return false;
+  }
+  if (layer.tileset.tiles[node.tileId].isTileset) {
+    return true;
+  }
+  const sse = computeNodeSSE(context.camera, node);
+  if (node.parent.type === 'Object3D') {
+    return sse < layer.sseThreshold;
+  } else {
+    return sse > layer.sseThreshold;
+  }
+};
 
-  ////// DOCUMENTS MODULE
-  let documentModule = new udviz.Widgets.DocumentModule(
-    requestService,
-    app.config
-  );
-  app.addModuleView('documents', documentModule.view);
+const reverseRefinement = () => {
+  return itowns.process3dTilesNode(itowns.$3dTilesCulling, reverseSubdivision);
+};
 
-  ////// DOCUMENTS VISUALIZER EXTENSION (to orient the document)
-  const imageOrienter = new udviz.Widgets.DocumentVisualizerWindow(
-    documentModule,
-    app.view,
-    app.controls
+const refinement = () => {
+  return itowns.process3dTilesNode(
+    itowns.$3dTilesCulling,
+    itowns.$3dTilesSubdivisionControl
   );
+};
 
-  ////// CONTRIBUTE EXTENSION
-  new udviz.Widgets.Extensions.ContributeModule(
-    documentModule,
-    imageOrienter,
-    requestService,
-    app.view,
-    app.controls,
-    app.config
-  );
+app.start('../assets/config/config.json').then(() => {
+  // app.addBaseMapLayer();
+  // app.addElevationLayer();
+  // itowns.enableDracoLoader('./assets/draco/');
+  const layers = app.setupAndAdd3DTilesLayers();
 
-  ////// VALIDATION EXTENSION
-  new udviz.Widgets.Extensions.DocumentValidationModule(
-    documentModule,
-    requestService,
-    app.config
-  );
-
-  ////// DOCUMENT COMMENTS
-  new udviz.Widgets.Extensions.DocumentCommentsModule(
-    documentModule,
-    requestService,
-    app.config
-  );
-
-  ////// GUIDED TOURS MODULE
-  const guidedtour = new udviz.Widgets.GuidedTourController(
-    documentModule,
-    requestService,
-    app.config
-  );
-  app.addModuleView('guidedTour', guidedtour, {
-    name: 'Guided Tours',
-  });
-
-  ////// GEOCODING EXTENSION
-  const geocodingService = new udviz.Widgets.Extensions.GeocodingService(
-    requestService,
-    app.extent,
-    app.config
-  );
-  const geocodingView = new udviz.Widgets.Extensions.GeocodingView(
-    geocodingService,
-    app.controls,
-    app.view
-  );
-  app.addModuleView('geocoding', geocodingView, {
-    binding: 's',
-    name: 'Address Search',
-  });
-
-  ////// CITY OBJECTS MODULE
-  let cityObjectModule = new udviz.Widgets.CityObjectModule(
-    app.layerManager,
-    app.config
-  );
-  app.addModuleView('cityObjects', cityObjectModule.view);
-
-  ////// LINKS MODULE
-  new udviz.Widgets.LinkModule(
-    documentModule,
-    cityObjectModule,
-    requestService,
-    app.view,
-    app.controls,
-    app.config
-  );
-
-  ////// 3DTILES DEBUG
-  const debug3dTilesWindow = new udviz.Widgets.Extensions.Debug3DTilesWindow(
-    app.layerManager
-  );
-  app.addModuleView('3dtilesDebug', debug3dTilesWindow, {
-    name: '3DTiles Debug',
-  });
-
-  ////// CAMERA POSITIONER
-  const cameraPosition = new udviz.Widgets.CameraPositionerView(
-    app.view,
-    app.controls
-  );
-  app.addModuleView('cameraPositioner', cameraPosition);
-
-  ////// LAYER CHOICE MODULE
-  const layerChoice = new udviz.Widgets.LayerChoice(app.layerManager);
+  const layerChoice = new Widgets.LayerChoice(app.layerManager);
   app.addModuleView('layerChoice', layerChoice);
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      const keyName = event.key;
+      if (keyName === 's') {
+        if (isReversed) {
+          for (let [id, value] of Object.entries(layers)) {
+            value[0].update = refinement();
+          }
+          isReversed = false;
+        } else {
+          for (let [id, value] of Object.entries(layers)) {
+            value[0].update = reverseRefinement();
+          }
+          isReversed = true;
+        }
+      }
+    },
+    false
+  );
 });
