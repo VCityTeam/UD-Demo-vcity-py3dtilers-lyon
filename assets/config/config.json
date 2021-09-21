@@ -53,5 +53,24 @@
       "heading": "-49.6",
       "tilt": "17"
     }
+  },
+  "cityObjects": {
+    "styles": {
+      "layerDefault": {
+        "materialProps": {
+          "color": "#ffa14f"
+        }
+      },
+      "selection": {
+        "materialProps": {
+          "color": "#13ddef"
+        }
+      },
+      "linkedWithDisplayedDocument": {
+        "materialProps": {
+          "color": "#4c5af7"
+        }
+      }
+    }
   }
 }
