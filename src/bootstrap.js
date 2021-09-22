@@ -5,7 +5,7 @@ const app = new Templates.AllWidget();
 const boundingVolumeBox = new THREE.Box3();
 const boundingVolumeSphere = new THREE.Sphere();
 var isReversed = false;
-var layers = {}
+var layers = {};
 
 var styles = `
 #switchProcessButton {
@@ -18,9 +18,9 @@ var styles = `
 }
 #switchProcessButton:hover {
   background: lightsalmon;
-}`
+}`;
 
-var styleSheet = document.createElement("style");
+var styleSheet = document.createElement('style');
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
@@ -93,7 +93,7 @@ const switchRefinement = () => {
 };
 
 let btn = document.createElement('button');
-btn.id = "switchProcessButton";
+btn.id = 'switchProcessButton';
 btn.innerHTML = 'Switch 3DTiles process';
 btn.onclick = function () {
   switchRefinement();
@@ -122,5 +122,9 @@ app.start('../assets/config/config.json').then(() => {
   app.addModuleView('cityObjects', cityObjectModule.view);
 
   let div = document.getElementById('_all_widget_menu');
-  div.appendChild(btn);
+  if (div == null) {
+    document.body.appendChild(btn);
+  } else {
+    div.appendChild(btn);
+  }
 });
