@@ -7,6 +7,23 @@ const boundingVolumeSphere = new THREE.Sphere();
 var isReversed = false;
 var layers = {}
 
+var styles = `
+#switchProcessButton {
+  line-height: 20px;
+  font-weight: bold;
+  background: salmon;
+  border: none;
+  width: 60px;
+  font-size: 11px;
+}
+#switchProcessButton:hover {
+  background: lightsalmon;
+}`
+
+var styleSheet = document.createElement("style");
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+
 // This method was created by iTowns
 // https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js#L257
 const computeNodeSSE = (camera, node) => {
@@ -74,9 +91,10 @@ const switchRefinement = () => {
     isReversed = true;
   }
 };
+
 let btn = document.createElement('button');
-btn.innerHTML = 'Switch processing';
-document.body.appendChild(btn);
+btn.id = "switchProcessButton";
+btn.innerHTML = 'Switch 3DTiles process';
 btn.onclick = function () {
   switchRefinement();
 };
@@ -103,14 +121,6 @@ app.start('../assets/config/config.json').then(() => {
   );
   app.addModuleView('cityObjects', cityObjectModule.view);
 
-  document.addEventListener(
-    'keydown',
-    (event) => {
-      const keyName = event.key;
-      if (keyName === 's') {
-        switchRefinement();
-      }
-    },
-    false
-  );
+  let div = document.getElementById('_all_widget_menu');
+  div.appendChild(btn);
 });
