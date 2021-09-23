@@ -12,10 +12,14 @@ var useCameraPosition = true;
 const computeNodeSSE = (camera, node) => {
   node.distance = 0;
   var position = null;
+  var preSSE = camera._preSSE;
 
-  if (useCameraPosition || mousePosition == null)
+  if (useCameraPosition || mousePosition == null) 
     position = camera.camera3D.position;
-  else position = mousePosition;
+  else {
+      position = mousePosition;
+      preSSE = preSSE / 10;
+  }
 
   if (node.boundingVolume.region) {
     boundingVolumeBox.copy(node.boundingVolume.region.box3D);
@@ -34,7 +38,7 @@ const computeNodeSSE = (camera, node) => {
     );
   } else return Infinity;
   if (node.distance === 0) return Infinity;
-  return camera._preSSE * (node.geometricError / node.distance);
+  return preSSE * (node.geometricError / node.distance);
 };
 
 const reverseSubdivision = (context, layer, node) => {
