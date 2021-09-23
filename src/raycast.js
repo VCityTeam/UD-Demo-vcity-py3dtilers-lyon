@@ -13,7 +13,7 @@ function setObjects3D(tiles) {
   return objectsToRaycast;
 }
 
-export function raycastObjects3D(layers, camera, mouse) {
+export function raycastObjects3D(layers, camera, mousePosition) {
   var objectsToRaycast = [];
 
   for (let [id, value] of Object.entries(layers)) {
@@ -24,12 +24,10 @@ export function raycastObjects3D(layers, camera, mouse) {
   }
 
   // update the picking ray with the camera and mouse position
-  raycaster.setFromCamera(mouse, camera.camera3D);
+  raycaster.setFromCamera(mousePosition, camera.camera3D);
 
   // calculate objects intersecting the picking ray
-  const intersects = raycaster.intersectObjects(objectsToRaycast);
+  const intersects = raycaster.intersectObjects(objectsToRaycast, true);
 
-  for (let i = 0; i < intersects.length; i++) {
-    console.log(intersects[i]);
-  }
+  if (intersects.length > 0) return intersects[0].point;
 }
