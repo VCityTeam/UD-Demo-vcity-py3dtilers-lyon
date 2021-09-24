@@ -1,6 +1,11 @@
 /** @format */
 import { Templates, Widgets, THREE } from 'ud-viz';
-import { reverseRefinement, setMousePosition, switchPositionReference, setLayersDefaultRefinement } from './3dtilesProcessing';
+import {
+  reverseRefinement,
+  setMousePosition,
+  switchPositionReference,
+  setLayersDefaultRefinement,
+} from './3dtilesProcessing';
 import { raycastObjects3D } from './raycast';
 
 const app = new Templates.AllWidget();
@@ -44,6 +49,7 @@ function onMouseMove(event) {
 
   if (camera != null && layers != null) {
     var positionOnGround = raycastObjects3D(layers, camera, mousePosition);
+    app.view.notifyChange(camera.camera3D);
     setMousePosition(positionOnGround);
   }
 }
@@ -55,6 +61,7 @@ reverseButton.id = 'reverseProcessButton';
 reverseButton.innerHTML = 'Reverse 3DTiles process';
 reverseButton.onclick = function () {
   reverseRefinement(layers);
+  app.view.notifyChange(camera.camera3D);
 };
 
 let useMouseButton = document.createElement('button');
