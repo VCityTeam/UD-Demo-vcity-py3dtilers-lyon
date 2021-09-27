@@ -13,11 +13,11 @@ function setObjects3D(tiles) {
   return objectsToRaycast;
 }
 
-export function raycastObjects3D(layers, camera, mousePosition) {
+export function raycastObjects3D(layers, targetLayerId, camera, mousePosition) {
   var objectsToRaycast = [];
 
   for (let [id, value] of Object.entries(layers)) {
-    if (id === '3d-tiles-layer-relief') {
+    if (id === targetLayerId) {
       objectsToRaycast = setObjects3D(value[1].tiles);
       break;
     }

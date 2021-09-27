@@ -49,9 +49,9 @@ function onMouseMove(event) {
   mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   if (camera != null && layers != null) {
-    var positionOnGround = raycastObjects3D(layers, camera, mousePosition);
-    app.view.notifyChange(camera.camera3D);
+    var positionOnGround = raycastObjects3D(layers, '3d-tiles-layer-relief', camera, mousePosition);
     setMousePosition(positionOnGround);
+    app.view.notifyChange(camera.camera3D);
   }
 }
 
