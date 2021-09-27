@@ -5,9 +5,10 @@ const boundingVolumeSphere = new THREE.Sphere();
 
 var isReversed = false;
 var mousePosition = null;
-var useCameraPosition = true;
+var useCameraPosition = false;
 
-// This method was created by iTowns
+// This method is a copy of the `computeNodeSSE` by iTowns
+// but is using either camera position or mouse position
 // https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js#L257
 const computeNodeSSE = (camera, node) => {
   node.distance = 0;
@@ -41,6 +42,9 @@ const computeNodeSSE = (camera, node) => {
   return preSSE * (node.geometricError / node.distance);
 };
 
+// This method is a copy of the `$3dTilesSubdivisionControl` by iTowns
+// but does the opposite of what its suppose to do
+// https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js#L374
 const reverseSubdivision = (context, layer, node) => {
   if (layer.tileset.tiles[node.tileId].children === undefined) return false;
   if (layer.tileset.tiles[node.tileId].isTileset) return true;
@@ -49,6 +53,9 @@ const reverseSubdivision = (context, layer, node) => {
   else return sse > layer.sseThreshold;
 };
 
+// This method is a copy of the `$3dTilesSubdivisionControl` by iTowns
+// but uses the local "computeNodeSSE" method
+// https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js#L374
 const subdivision = (context, layer, node) => {
   if (layer.tileset.tiles[node.tileId].children === undefined) return false;
   if (layer.tileset.tiles[node.tileId].isTileset) return true;
