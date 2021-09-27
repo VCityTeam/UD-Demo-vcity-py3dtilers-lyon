@@ -49,7 +49,12 @@ function onMouseMove(event) {
   mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   if (camera != null && layers != null) {
-    var positionOnGround = raycastObjects3D(layers, '3d-tiles-layer-relief', camera, mousePosition);
+    var positionOnGround = raycastObjects3D(
+      layers,
+      '3d-tiles-layer-relief',
+      camera,
+      mousePosition
+    );
     setMousePosition(positionOnGround);
     app.view.notifyChange(camera.camera3D);
   }
@@ -75,10 +80,6 @@ useMouseButton.onclick = function () {
 };
 
 app.start('../assets/config/config.json').then(() => {
-  // app.addBaseMapLayer();
-  // app.addElevationLayer();
-  // itowns.enableDracoLoader('./assets/draco/');
-
   // Add 3DTiles layers in the scene and set their default refinement method
   layers = app.setupAndAdd3DTilesLayers();
   setLayersDefaultRefinement(layers);
@@ -94,13 +95,6 @@ app.start('../assets/config/config.json').then(() => {
   app.addModuleView('3dtilesDebug', debug3dTilesWindow, {
     name: '3DTiles Debug',
   });
-
-  // Create the city object module
-  const cityObjectModule = new Widgets.CityObjectModule(
-    app.layerManager,
-    app.config
-  );
-  app.addModuleView('cityObjects', cityObjectModule.view);
 
   // Add the buttons in the page
   let div = document.getElementById('_all_widget_menu');
