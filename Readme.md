@@ -29,3 +29,7 @@ With the reversed processing, the children are displayed before their parents. T
 ### Switch position reference
 
 This button change the reference position to refine 3D Tiles. The reference position is either the camera or the mouse position. The tiles will be refined depending on their distance with the reference position.
+
+## Docker
+
+A [Docker](https://www.docker.com/) version of the demo also exists in [this repo](https://github.com/VCityTeam/UD-Demo-vcity-lods-lyon-docker).
