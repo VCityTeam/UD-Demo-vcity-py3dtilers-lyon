@@ -20,6 +20,14 @@ npm install
 
 ## Usage
 
+Run the demo:
+
+```bash
+npm run debug
+```
+
+The demo is now hosted on `localhost:8000`.
+
 This demo introduces 2 new buttons allowing to change the way iTowns is processing the 3D Tiles.
 
 ### Reverse 3DTiles process
