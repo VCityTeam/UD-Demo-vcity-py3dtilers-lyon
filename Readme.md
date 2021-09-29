@@ -1,4 +1,4 @@
-# 3D Tiles refinement demo
+# 3D Tiles refinement demo 
 
 This demo illustrate the refinement of [3D Tiles](https://github.com/CesiumGS/3d-tiles). The demo is based on [UD-Viz](https://github.com/VCityTeam/UD-Viz) which is using [iTowns](https://github.com/iTowns/itowns/tree/master/src) to visualize 3D models.
 
