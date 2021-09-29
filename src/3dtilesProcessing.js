@@ -15,11 +15,11 @@ const computeNodeSSE = (camera, node) => {
   var position = null;
   var preSSE = camera._preSSE;
 
-  if (useCameraPosition || mousePosition == null) 
+  if (useCameraPosition || mousePosition == null)
     position = camera.camera3D.position;
   else {
-      position = mousePosition;
-      preSSE = preSSE / 10;
+    position = mousePosition;
+    preSSE = preSSE / 10;
   }
 
   if (node.boundingVolume.region) {
@@ -73,21 +73,21 @@ const refinement = () => {
 
 export function reverseRefinement(layers) {
   if (isReversed) {
-    for (let [id, value] of Object.entries(layers)) {
-      value[0].update = refinement();
+    for (let id in layers) {
+      layers[id][0].update = refinement();
     }
     isReversed = false;
   } else {
-    for (let [id, value] of Object.entries(layers)) {
-      value[0].update = reversedRefinement();
+    for (let id in layers) {
+      layers[id][0].update = reversedRefinement();
     }
     isReversed = true;
   }
 }
 
 export function setLayersDefaultRefinement(layers) {
-  for (let [id, value] of Object.entries(layers)) {
-    value[0].update = refinement();
+  for (let id in layers) {
+    layers[id][0].update = refinement();
   }
 }
 
