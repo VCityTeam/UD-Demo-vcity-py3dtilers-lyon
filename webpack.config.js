@@ -45,7 +45,7 @@ module.exports = (env) => {
 
   const config = {
     mode,
-    entry: [path.resolve(__dirname, './src/bootstrap.js')],
+    entry: [path.resolve(__dirname, './src/index.js')],
     output: {
       path: outputPath,
       filename: 'app_name.js',
