@@ -1,19 +1,19 @@
 /** @format */
 import { THREE } from 'ud-viz';
 import {
-    reverseRefinement,
-    setMousePosition,
-    switchPositionReference,
-    setLayersDefaultRefinement,
-  } from './3dtilesProcessing';
+  reverseRefinement,
+  setMousePosition,
+  switchPositionReference,
+  setLayersDefaultRefinement,
+} from './3dtilesProcessing';
 import { raycastObjects3D } from './raycast';
 
 export class RefinementButtons {
   constructor(view, camera, layers) {
     this.useCameraPosition = false;
-    this.view = view
-    this.camera = camera
-    this.layers = layers
+    this.view = view;
+    this.camera = camera;
+    this.layers = layers;
 
     setLayersDefaultRefinement(layers);
 
@@ -73,24 +73,24 @@ export class RefinementButtons {
     window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
   }
 
-    // When using mouse position as reference to refine 3DTiles,
-    // raycast on the relief to find mouse world position
-    onMouseMove(event) {
-        if (this.useCameraPosition) return;
+  // When using mouse position as reference to refine 3DTiles,
+  // raycast on the relief to find mouse world position
+  onMouseMove(event) {
+    if (this.useCameraPosition) return;
     
-        var mousePosition = new THREE.Vector2();
-        mousePosition.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    var mousePosition = new THREE.Vector2();
+    mousePosition.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1;
     
-        if (this.camera != null && this.layers != null) {
-        var positionOnGround = raycastObjects3D(
-            this.layers,
-            '3d-tiles-layer-relief',
-            this.camera,
-            mousePosition
-        );
-        setMousePosition(positionOnGround);
-        this.view.notifyChange(this.camera.camera3D);
-        }
+    if (this.camera != null && this.layers != null) {
+      var positionOnGround = raycastObjects3D(
+        this.layers,
+        '3d-tiles-layer-relief',
+        this.camera,
+        mousePosition
+      );
+      setMousePosition(positionOnGround);
+      this.view.notifyChange(this.camera.camera3D);
     }
+  }
 }
