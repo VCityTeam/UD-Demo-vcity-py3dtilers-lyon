@@ -1,0 +1,51 @@
+{
+  "assets": {
+    "iconFolder": "../assets/icons",
+    "imageFolder": "../assets/img",
+    "logos": ["logo-liris.png", "logo-univ-lyon.png"]
+  },
+  "3DTilesLayers": [
+    {
+      "id": "3d-tiles-layer-building",
+      "url": "../assets/UD-Demo-vcity-py3dtilers-lyon/Lyon1_2018_Textured/tileset.json"
+    },
+    {
+      "id": "3d-tiles-layer-relief",
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Lyon_2018_LOD/Lyon_2018_LOD_Relief_TileSet/tileset.json",
+      "color": "0xd0ac7f"
+    },
+    {
+      "id": "3d-tiles-layer-road",
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Lyon_2018_MultiLayer/Lyon_2018_Roads_TileSet/tileset.json",
+      "color": "0x272727"
+    },
+    {
+      "id": "3d-tiles-layer-water",
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Lyon_2018_MultiLayer/Lyon_2018_Water_TileSet/tileset.json",
+      "color": "0x2ACAEA"
+    },
+    {
+      "id": "3d-tiles-layer-bridges",
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Lyon_2018_MultiLayer/Lyon_2018_Bridges_TileSet/tileset.json",
+      "color": "0xAC7FD0"
+    }
+  ],
+  "extents": {
+    "min_x": "1837500",
+    "max_x": "1848000",
+    "min_y": "5167500",
+    "max_y": "5180900"
+  },
+  "projection": "EPSG:3946",
+  "background_image_layer": {
+  },
+  "camera": {
+    "position": {
+      "x": "1842258.906522941",
+      "y": "5175805.233629481",
+      "range": "900",
+      "heading": "-100",
+      "tilt": "17"
+    }
+  }
+}
