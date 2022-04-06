@@ -7,7 +7,7 @@
   "3DTilesLayers": [
     {
       "id": "3d-tiles-layer-building",
-      "url": "../assets/UD-Demo-vcity-py3dtilers-lyon/Lyon1_2021_Height_Color/tileset.json"
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/UD-Demo-vcity-py3dtilers-lyon/Lyon-1_2021_Height_Color/tileset.json"
     },
     {
       "id": "3d-tiles-layer-relief",
