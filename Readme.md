@@ -15,6 +15,7 @@ Clone the repo then install it:
 ```bash
 git clone https://github.com/VCityTeam/UD-Demo-vcity-py3dtilers-lyon.git
 cd UD-Demo-vcity-py3dtilers-lyon
+npm install
 npm run build
 ```
 
