@@ -1,14 +1,13 @@
 {
   "assets": {
-    "iconFolder": "./assets/icons",
-    "imageFolder": "./assets/img",
+    "iconFolder": "../assets/icons",
+    "imageFolder": "../assets/img",
     "logos": ["logo-liris.png", "logo-univ-lyon.png"]
   },
   "3DTilesLayers": [
     {
       "id": "3d-tiles-layer-building",
-      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Lyon_2018_LOD/Lyon_2018_LOD_Buildings_TileSet/tileset.json",
-      "color": "0xFFFFFF"
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/UD-Demo-vcity-py3dtilers-lyon/Lyon-1_2021_Height_Color/tileset.json"
     },
     {
       "id": "3d-tiles-layer-relief",
@@ -42,9 +41,30 @@
   },
   "camera": {
     "position": {
-      "range": "3000",
-      "heading": "-49.6",
+      "x": "1842258.906522941",
+      "y": "5175805.233629481",
+      "range": "900",
+      "heading": "-100",
       "tilt": "17"
+    }
+  },
+  "cityObjects": {
+    "styles": {
+      "layerDefault": {
+        "materialProps": {
+          "color": "#ffa14f"
+        }
+      },
+      "selection": {
+        "materialProps": {
+          "color": "#13ddef"
+        }
+      },
+      "linkedWithDisplayedDocument": {
+        "materialProps": {
+          "color": "#4c5af7"
+        }
+      }
     }
   }
 }

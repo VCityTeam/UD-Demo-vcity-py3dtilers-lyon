@@ -1,7 +1,5 @@
 import { THREE } from 'ud-viz';
 
-const raycaster = new THREE.Raycaster();
-
 function setObjects3D(tiles) {
   var objectsToRaycast = [];
   for (let tile of tiles) {
@@ -23,6 +21,7 @@ export function raycastObjects3D(layers, targetLayerId, camera, mousePosition) {
     }
   }
 
+  const raycaster = new THREE.Raycaster();
   // update the picking ray with the camera and mouse position
   raycaster.setFromCamera(mousePosition, camera.camera3D);
 

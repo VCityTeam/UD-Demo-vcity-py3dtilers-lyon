@@ -1,6 +1,6 @@
-# 3D Tiles refinement demo 
+# py3dtilers demo
 
-This demo illustrate the refinement of [3D Tiles](https://github.com/CesiumGS/3d-tiles). The demo is based on [UD-Viz](https://github.com/VCityTeam/UD-Viz) which is using [iTowns](https://github.com/iTowns/itowns/tree/master/src) to visualize 3D models.
+This demo illustrate [3D Tiles](https://github.com/CesiumGS/3d-tiles) tilesets created with [py3dtilers](https://github.com/VCityTeam/py3dtilers). The demo is based on [UD-Viz](https://github.com/VCityTeam/UD-Viz) which is using [iTowns](https://github.com/iTowns/itowns/tree/master/src) to visualize 3D models.
 
 _Note: the code in [3dtilesProcessing.js](src/3dtilesProcessing.js) is widely inspired by the [iTowns's 3D Tiles processing](https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js)._
 
@@ -15,7 +15,7 @@ Clone the repo then install it:
 ```bash
 git clone https://github.com/VCityTeam/UD-Demo-vcity-lods-lyon.git
 cd UD-Demo-vcity-lods-lyon
-npm install
+npm run build
 ```
 
 ## Usage
@@ -23,10 +23,12 @@ npm install
 Run the demo:
 
 ```bash
-npm run debug
+pyton3 -m http.server
 ```
 
 The demo is now hosted on `localhost:8000`.
+
+## Refinement
 
 This demo introduces 2 new buttons allowing to change the way iTowns is processing the 3D Tiles.
 
@@ -42,4 +44,4 @@ This button change the reference position to refine 3D Tiles. The reference posi
 
 ## Docker
 
-A [Docker](https://www.docker.com/) version of the demo also exists in [this repo](https://github.com/VCityTeam/UD-Demo-vcity-lods-lyon-docker).
+A [Docker](https://www.docker.com/) version of the demo also exists in [this repo](https://github.com/VCityTeam/UD-Demo-vcity-py3dtilers-lyon-docker).
