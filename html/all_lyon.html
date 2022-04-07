@@ -1,0 +1,42 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3DTiles of all Lyon boroughs</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <script src="../dist/release/app_name.js"></script>
+    <!-- <script src="../dist/debug/app_name.js"></script> -->
+    <script type="text/javascript">
+      const app = new app_name.Templates.AllWidget();
+
+      app.start('../assets/config/all_lyon.json').then(() => {
+        // Add 3DTiles layers in the scene
+        app.setupAndAdd3DTilesLayers();
+
+        // Create the layer choice module
+        const layerChoice = new app_name.Widgets.LayerChoice(app.layerManager);
+        app.addModuleView('layerChoice', layerChoice);
+
+        // Create the 3DTiles debugger module
+        const debug3dTilesWindow = new app_name.Widgets.Extensions.Debug3DTilesWindow(
+          app.layerManager
+        );
+        app.addModuleView('3dtilesDebug', debug3dTilesWindow, {
+          name: '3DTiles Debug',
+        });
+        
+        // Create the CityObject module
+        let cityObjectModule = new app_name.Widgets.CityObjectModule(
+          app.layerManager,
+          app.config
+        );
+        app.addModuleView('cityObjects', cityObjectModule.view);
+      });
+    </script>
+  </body>
+</html>
