@@ -13,8 +13,8 @@ You need [Node.js](https://en.wikipedia.org/wiki/Node.js) to run the demo.
 Clone the repo then install it:
 
 ```bash
-git clone https://github.com/VCityTeam/UD-Demo-vcity-lods-lyon.git
-cd UD-Demo-vcity-lods-lyon
+git clone https://github.com/VCityTeam/UD-Demo-vcity-py3dtilers-lyon.git
+cd UD-Demo-vcity-py3dtilers-lyon
 npm run build
 ```
 
