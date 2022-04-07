@@ -44,4 +44,4 @@ This button change the reference position to refine 3D Tiles. The reference posi
 
 ## Docker
 
-A [Docker](https://www.docker.com/) version of the demo also exists in [this repo](https://github.com/VCityTeam/UD-Demo-vcity-lods-lyon-docker).
+A [Docker](https://www.docker.com/) version of the demo also exists in [this repo](https://github.com/VCityTeam/UD-Demo-vcity-py3dtilers-lyon-docker).
