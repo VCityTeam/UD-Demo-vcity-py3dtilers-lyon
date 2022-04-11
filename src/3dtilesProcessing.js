@@ -63,12 +63,28 @@ const subdivision = (context, layer, node) => {
   return sse > layer.sseThreshold;
 };
 
+function culling(layer, camera, node, tileMatrixWorld) {
+  if (!node.transform) return false;
+  let cameraPos = camera.camera3D.position;
+  let nodePos = new THREE.Vector3(
+    node.transform.elements[12],
+    node.transform.elements[13],
+    node.transform.elements[14]
+  );
+  let distance = nodePos.distanceTo(cameraPos);
+  return distance > 5000;
+}
+
 const reversedRefinement = () => {
   return itowns.process3dTilesNode(itowns.$3dTilesCulling, reverseSubdivision);
 };
 
 const refinement = () => {
   return itowns.process3dTilesNode(itowns.$3dTilesCulling, subdivision);
+};
+
+const distanceCulling = () => {
+  return itowns.process3dTilesNode(culling, itowns.$3dTilesSubdivisionControl);
 };
 
 export function reverseRefinement(layers) {
@@ -88,6 +104,12 @@ export function reverseRefinement(layers) {
 export function setLayersDefaultRefinement(layers) {
   for (let id in layers) {
     layers[id][0].update = refinement();
+  }
+}
+
+export function setLayersDistanceCulling(layers) {
+  for (let id in layers) {
+    layers[id][0].update = distanceCulling();
   }
 }
 
