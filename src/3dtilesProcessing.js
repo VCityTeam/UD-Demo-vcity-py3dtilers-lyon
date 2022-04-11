@@ -63,13 +63,14 @@ const subdivision = (context, layer, node) => {
   return sse > layer.sseThreshold;
 };
 
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "tileMatrixWorld" }]*/
 function culling(layer, camera, node, tileMatrixWorld) {
   if (!node.transform) return false;
   let cameraPos = camera.camera3D.position;
   let nodePos = new THREE.Vector3(
-    node.transform.elements[12],
-    node.transform.elements[13],
-    node.transform.elements[14]
+    tileMatrixWorld.elements[12],
+    tileMatrixWorld.elements[13],
+    tileMatrixWorld.elements[14]
   );
   let distance = nodePos.distanceTo(cameraPos);
   return distance > 5000;
