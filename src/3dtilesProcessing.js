@@ -63,7 +63,6 @@ const subdivision = (context, layer, node) => {
   return sse > layer.sseThreshold;
 };
 
-/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "tileMatrixWorld" }]*/
 function culling(layer, camera, node, tileMatrixWorld) {
   if (!node.transform) return false;
   let cameraPos = camera.camera3D.position;
