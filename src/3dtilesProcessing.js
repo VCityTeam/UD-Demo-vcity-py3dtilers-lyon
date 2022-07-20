@@ -66,12 +66,26 @@ const subdivision = (context, layer, node) => {
 function culling(layer, camera, node, tileMatrixWorld) {
   if (!node.transform) return false;
   let cameraPos = camera.camera3D.position;
+  let box = node.boundingVolume.box;
   let nodePos = new THREE.Vector3(
     tileMatrixWorld.elements[12],
     tileMatrixWorld.elements[13],
     tileMatrixWorld.elements[14]
   );
-  let distance = nodePos.distanceTo(cameraPos);
+  let box_min = new THREE.Vector3(
+    nodePos.x + box.min.x,
+    nodePos.y + box.min.y,
+    nodePos.z + box.min.z
+  );
+  let box_max = new THREE.Vector3(
+    nodePos.x + box.max.x,
+    nodePos.y + box.max.y,
+    nodePos.z + box.max.z
+  );
+  let dx = Math.max(box_min.x - cameraPos.x, 0, cameraPos.x - box_max.x);
+  let dy = Math.max(box_min.y - cameraPos.y, 0, cameraPos.y - box_max.y);
+  let dz = Math.max(box_min.z - cameraPos.z, 0, cameraPos.z - box_max.z);
+  let distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
   return distance > 5000;
 }
 
