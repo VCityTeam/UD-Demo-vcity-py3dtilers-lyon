@@ -148,8 +148,8 @@ iframe {
 }
 
 .image__title {
-  font-size: 2em;
-  -webkit-text-stroke: 1px rgb(58, 56, 56);
+  font-size: 2.5em;
+  -webkit-text-stroke: 0.05em rgb(58, 56, 56);
   font-weight: bold;
   vertical-align: top;
 }
