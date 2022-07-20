@@ -36,23 +36,24 @@ body {
   transition: 0s 0s height;
 }
 
-#header h1 {
-  padding-left: var(--panel-padding);
+#header h1, #header p {
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#header h1 {
   color: var(--color-blue);
 }
 
-#version {
-  text-decoration: none;
-  color: var(--color-blue);
-  border: 1px solid var(--color-blue);
-  border-radius: 4px;
-  line-height: 16px;
-  padding: 0px 2px;
-  margin-left: 6px;
-  font-size: 0.9rem;
+#header p {
+  color: var(--text-color);
+}
+
+a, h2 {
+  font-family: 'Quicksand', sans-serif;
 }
 
 #contentWrapper {
@@ -97,6 +98,7 @@ iframe {
   padding: 0px;
   margin: 0px 0 20px 0;
 }
+
 #panel #content ul li {
   margin: 1px 0;
 }
