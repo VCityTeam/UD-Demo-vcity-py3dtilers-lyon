@@ -27,7 +27,7 @@
       {
         "id": "3d-tiles-layer-bridges",
         "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Demo/UD-Demo-vcity-py3dtilers-lyon/Lyon_2018_Bridges_TileSet/tileset.json",
-        "color": "0xAC7FD0"
+        "color": "0x999999"
       }
     ],
     "extents": {

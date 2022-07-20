@@ -15,6 +15,9 @@
       const app = new app_name.Templates.AllWidget();
 
       app.start('../assets/config/height_color.json').then(() => {
+        app.addBaseMapLayer();
+        app.addElevationLayer();
+
         // Add 3DTiles layers in the scene
         app.setupAndAdd3DTilesLayers();
 
