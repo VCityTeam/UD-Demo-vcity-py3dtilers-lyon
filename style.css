@@ -134,7 +134,7 @@ iframe {
 }
 
 .image__overlay:hover {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .image__overlay:hover > * {
@@ -148,7 +148,6 @@ iframe {
 .image__title {
   font-size: 2em;
   -webkit-text-stroke: 1px rgb(58, 56, 56);
-  color: #d5d5d5;
   font-weight: bold;
   vertical-align: top;
 }
