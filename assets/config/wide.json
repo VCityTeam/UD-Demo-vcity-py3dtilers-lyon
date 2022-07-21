@@ -11,10 +11,10 @@
     }
   ],
   "extents": {
-    "min_x": "1737500",
-    "max_x": "1948000",
-    "min_y": "5067500",
-    "max_y": "5280900"
+    "min_x": "1791200",
+    "max_x": "1875680",
+    "min_y": "5135500",
+    "max_y": "5240900"
   },
   "projection": "EPSG:3946",
   "background_image_layer": {
