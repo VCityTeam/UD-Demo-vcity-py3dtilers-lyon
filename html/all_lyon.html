@@ -15,16 +15,13 @@
       const app = new app_name.Templates.AllWidget();
 
       app.start('../assets/config/all_lyon.json').then(() => {
-        // Add 3DTiles layers in the scene
-        app.setupAndAdd3DTilesLayers();
-
         // Create the layer choice module
-        const layerChoice = new app_name.Widgets.LayerChoice(app.layerManager);
+        const layerChoice = new app_name.Widgets.LayerChoice(app.view3D.getLayerManager());
         app.addModuleView('layerChoice', layerChoice);
 
         // Create the 3DTiles debugger module
-        const debug3dTilesWindow = new app_name.Widgets.Extensions.Debug3DTilesWindow(
-          app.layerManager
+        const debug3dTilesWindow = new app_name.Widgets.Debug3DTilesWindow(
+          app.view3D.getLayerManager()
         );
         app.addModuleView('3dtilesDebug', debug3dTilesWindow, {
           name: '3DTiles Debug',
@@ -32,7 +29,7 @@
         
         // Create the CityObject module
         let cityObjectModule = new app_name.Widgets.CityObjectModule(
-          app.layerManager,
+          app.view3D.getLayerManager(),
           app.config
         );
         app.addModuleView('cityObjects', cityObjectModule.view);

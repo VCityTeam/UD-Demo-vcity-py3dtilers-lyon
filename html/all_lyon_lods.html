@@ -15,31 +15,32 @@
       const app = new app_name.Templates.AllWidget();
 
       app.start('../assets/config/all_lyon_lods.json').then(() => {
-        // Add 3DTiles layers in the scene and set their default refinement method
-        let layers = app.setupAndAdd3DTilesLayers();
-
         // Create the layer choice module
-        const layerChoice = new app_name.Widgets.LayerChoice(app.layerManager);
+        const layerChoice = new app_name.Widgets.LayerChoice(app.view3D.getLayerManager());
         app.addModuleView('layerChoice', layerChoice);
 
         // Create the 3DTiles debugger module
-        const debug3dTilesWindow = new app_name.Widgets.Extensions.Debug3DTilesWindow(
-          app.layerManager
-        );
+        const debug3dTilesWindow =
+          new app_name.Widgets.Debug3DTilesWindow(app.view3D.getLayerManager());
         app.addModuleView('3dtilesDebug', debug3dTilesWindow, {
           name: '3DTiles Debug',
         });
-        
+
         // Create the CityObject module
         let cityObjectModule = new app_name.Widgets.CityObjectModule(
-          app.layerManager,
+          app.view3D.getLayerManager(),
           app.config
         );
         app.addModuleView('cityObjects', cityObjectModule.view);
 
-        let camera = app.view.camera;
+        let camera = app.view3D.getCamera();
 
-        let refinementButtons = new app_name.RefinementButtons(app.view, camera, layers);
+        let tilesManagers = app.view3D.getLayerManager().tilesManagers;
+        let refinementButtons = new app_name.RefinementButtons(
+          app.view3D.getItownsView(),
+          camera,
+          tilesManagers,
+        );
       });
     </script>
   </body>

@@ -1,7 +1,6 @@
 import { THREE } from 'ud-viz';
 
-function setObjects3D(tiles) {
-  var objectsToRaycast = [];
+function setObjects3D(tiles, objectsToRaycast) {
   for (let tile of tiles) {
     if (tile) {
       var obj3D = tile.getObject3D();
@@ -11,19 +10,18 @@ function setObjects3D(tiles) {
   return objectsToRaycast;
 }
 
-export function raycastObjects3D(layers, targetLayerId, camera, mousePosition) {
-  var objectsToRaycast = [];
+export function raycastObjects3D(tilesManagers, targetLayerId, camera, mousePosition) {
+  let objectsToRaycast = [];
 
-  for (let [id, value] of Object.entries(layers)) {
-    if (id === targetLayerId) {
-      objectsToRaycast = setObjects3D(value[1].tiles);
-      break;
+  tilesManagers.forEach(function (tilesManager) {
+    if (tilesManager.layer.id === targetLayerId) {
+      objectsToRaycast = setObjects3D(tilesManager.tiles, objectsToRaycast);
     }
-  }
+  });
 
   const raycaster = new THREE.Raycaster();
   // update the picking ray with the camera and mouse position
-  raycaster.setFromCamera(mousePosition, camera.camera3D);
+  raycaster.setFromCamera(mousePosition, camera);
 
   // calculate objects intersecting the picking ray
   const intersects = raycaster.intersectObjects(objectsToRaycast, true);
