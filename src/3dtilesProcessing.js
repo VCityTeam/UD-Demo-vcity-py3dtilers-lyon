@@ -101,30 +101,30 @@ const distanceCulling = () => {
   return itowns.process3dTilesNode(culling, itowns.$3dTilesSubdivisionControl);
 };
 
-export function reverseRefinement(layers) {
+export function reverseRefinement(tilesManagers) {
   if (isReversed) {
-    for (let id in layers) {
-      layers[id][0].update = refinement();
-    }
+    tilesManagers.forEach(function (tilesManager) {
+      tilesManager.layer.update = refinement();
+    });
     isReversed = false;
   } else {
-    for (let id in layers) {
-      layers[id][0].update = reversedRefinement();
-    }
+    tilesManagers.forEach(function (tilesManager) {
+      tilesManager.layer.update = reversedRefinement();
+    });
     isReversed = true;
   }
 }
 
-export function setLayersDefaultRefinement(layers) {
-  for (let id in layers) {
-    layers[id][0].update = refinement();
-  }
+export function setLayersDefaultRefinement(tilesManagers) {
+  tilesManagers.forEach(function (tilesManager) {
+    tilesManager.layer.update = refinement();
+  });
 }
 
-export function setLayersDistanceCulling(layers) {
-  for (let id in layers) {
-    layers[id][0].update = distanceCulling();
-  }
+export function setLayersDistanceCulling(tilesManagers) {
+  tilesManagers.forEach(function (tilesManager) {
+    tilesManager.layer.update = distanceCulling();
+  });
 }
 
 export function switchPositionReference() {

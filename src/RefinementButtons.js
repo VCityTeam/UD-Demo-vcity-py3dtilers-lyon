@@ -9,13 +9,13 @@ import {
 import { raycastObjects3D } from './raycast';
 
 export class RefinementButtons {
-  constructor(view, camera, layers) {
+  constructor(view, camera, tilesManagers) {
     this.useCameraPosition = false;
     this.view = view;
     this.camera = camera;
-    this.layers = layers;
+    this.tilesManagers = tilesManagers;
 
-    setLayersDefaultRefinement(layers);
+    setLayersDefaultRefinement(tilesManagers);
 
     // Buttons CSS style
     var styles = `
@@ -48,8 +48,8 @@ export class RefinementButtons {
     reverseButton.id = 'reverseProcessButton';
     reverseButton.innerHTML = 'Reverse 3DTiles process';
     reverseButton.onclick = function () {
-      reverseRefinement(layers);
-      view.notifyChange(camera.camera3D);
+      reverseRefinement(tilesManagers);
+      view.notifyChange(camera);
     };
 
     // Create a button which switch the reference position to refine the 3DTiles
@@ -82,15 +82,15 @@ export class RefinementButtons {
     mousePosition.x = (event.clientX / window.innerWidth) * 2 - 1;
     mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1;
     
-    if (this.camera != null && this.layers != null) {
+    if (this.camera != null && this.tilesManagers != null) {
       var positionOnGround = raycastObjects3D(
-        this.layers,
+        this.tilesManagers,
         '3d-tiles-layer-relief',
         this.camera,
         mousePosition
       );
       setMousePosition(positionOnGround);
-      this.view.notifyChange(this.camera.camera3D);
+      this.view.notifyChange(this.camera);
     }
   }
 }
