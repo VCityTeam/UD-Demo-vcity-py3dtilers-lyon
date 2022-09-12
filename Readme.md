@@ -24,7 +24,7 @@ npm run build
 Run the demo:
 
 ```bash
-pyton3 -m http.server
+python3 -m http.server
 ```
 
 The demo is now hosted on `localhost:8000`.
