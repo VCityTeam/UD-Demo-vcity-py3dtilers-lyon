@@ -7,7 +7,7 @@
   "3DTilesLayers": [
     {
       "id": "3d-tiles-layer-building",
-      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/Demo/UD-Demo-vcity-py3dtilers-lyon/Lyon-1_2018_Textured/tileset.json"
+      "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2018/Lyon-1_2018_Textured/tileset.json"
     }
   ],
   "extents": {
