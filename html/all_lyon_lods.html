@@ -9,11 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div id="view_container">
-      <div id="logo_div">
-        <img class="logo" src="../assets/img/logo-imu.png" />
-        <img class="logo" src="../assets/img/logo-liris.png" />
-      </div>
+    <div id="view_container"></div>
+    <div id="logo_div">
+      <img class="logo" src="../assets/img/logo-imu.png" />
+      <img class="logo" src="../assets/img/logo-liris.png" />
+    </div>
+    <div id="widgets_container">
+      <button id="reverse_button">Reverse 3DTiles process</button>
+      <button id="switch_button">Switch position reference</button>
     </div>
     <script src="../dist/production/bundle.js"></script>
     <!-- <script src="../dist/development/bundle.js"></script> -->
@@ -55,6 +58,7 @@
           );
 
           // ADD LAYERS
+          const c3dTilesLayers = [];
           config['3DTiles'].forEach((conf) => {
             const layer = app.C3DTilesLayer(conf, view);
             layer.style = new app.itowns.Style({
@@ -62,12 +66,13 @@
                 color: conf.color || 'white',
               },
             });
+            c3dTilesLayers.push(layer);
             app.itowns.View.prototype.addLayer.call(view, layer);
           });
 
           // ADD WIDGET
           const widget = new app.C3DTiles(view, {
-            parentElement: viewDomElement,
+            parentElement: document.getElementById('widgets_container'),
             layerContainerClassName: 'widgets-3dtiles-layer-container',
             c3DTFeatureInfoContainerClassName:
               'widgets-3dtiles-feature-container',
@@ -86,6 +91,40 @@
               event,
               contextSelection
             );
+          };
+
+          // ADD REFINEMENT BUTTONS
+          app.setLayersDefaultRefinement(c3dTilesLayers);
+          let useCameraPosition = false;
+
+          window.addEventListener(
+            'mousemove',
+            (event) => {
+              if (useCameraPosition) return;
+              const intersects = view.pickObjectsAt(
+                event,
+                0,
+                view
+                  .getLayers()
+                  .find((el) => el.id == '3d-tiles-layer-relief')
+              );
+
+              if (intersects.length) {
+                app.setMousePosition(intersects[0].point);
+                view.notifyChange(view.camera3D);
+              }
+            },
+            false
+          );
+          const reverseButton = document.getElementById('reverse_button');
+          reverseButton.onclick = function () {
+            app.reverseRefinement(c3dTilesLayers);
+            view.notifyChange(view.camera3D);
+          };
+
+          const switchButton = document.getElementById('switch_button');
+          switchButton.onclick = function () {
+            useCameraPosition = app.switchPositionReference();
           };
         });
     </script>

@@ -55,10 +55,13 @@
         // ADD LAYERS
         view.addLayer(app.BaseMapLayer(config.baseMap, extent));
 
+        const c3dTilesLayers = [];
         config['3DTiles'].forEach((conf) => {
           const layer = app.C3DTilesLayer(conf, view);
+          c3dTilesLayers.push(layer);
           app.itowns.View.prototype.addLayer.call(view, layer);
         });
+        app.setLayersDistanceCulling(c3dTilesLayers);
 
         // ADD WIDGET
         const widget = new app.C3DTiles(view, {

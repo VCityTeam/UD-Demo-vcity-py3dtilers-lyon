@@ -29,6 +29,13 @@ body {
   margin: 10px;
 }
 
+#reverse_button,
+#switch_button {
+  margin: 10px;
+  width: 200px;
+  height: 30px;
+}
+
 #logo_div {
   position: absolute;
   right: 0px;
