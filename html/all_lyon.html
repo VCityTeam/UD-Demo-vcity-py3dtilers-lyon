@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div id="view_container">
-      <div id="logo_div">
-        <img class="logo" src="../assets/img/logo-imu.png" />
-        <img class="logo" src="../assets/img/logo-liris.png" />
-      </div>
+    <div id="view_container"></div>
+    <div id="logo_div">
+      <img class="logo" src="../assets/img/logo-imu.png" />
+      <img class="logo" src="../assets/img/logo-liris.png" />
     </div>
+    <div id="widgets_container"></div>
     <script src="../dist/production/bundle.js"></script>
     <!-- <script src="../dist/development/bundle.js"></script> -->
     <script type="text/javascript">
@@ -67,7 +67,7 @@
 
           // ADD WIDGET
           const widget = new app.C3DTiles(view, {
-            parentElement: viewDomElement,
+            parentElement: document.getElementById('widgets_container'),
             layerContainerClassName: 'widgets-3dtiles-layer-container',
             c3DTFeatureInfoContainerClassName:
               'widgets-3dtiles-feature-container',
