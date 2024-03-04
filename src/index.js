@@ -6,3 +6,4 @@ export * as THREE from 'three';
 export { BaseMapLayer, C3DTilesLayer, ElevationLayer } from './layerUtils';
 export * as proj4 from 'proj4';
 export * as itowns from 'itowns';
+export { addClick3DTilesClickEvent } from './clickEvent';
