@@ -1,5 +1,5 @@
 /** @format */
-import { THREE } from 'ud-viz';
+import * as THREE from 'three';
 import {
   reverseRefinement,
   setMousePosition,

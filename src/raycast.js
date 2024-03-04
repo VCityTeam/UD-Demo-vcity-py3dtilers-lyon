@@ -1,4 +1,4 @@
-import { THREE } from 'ud-viz';
+import * as THREE from 'three';
 
 function setObjects3D(tiles, objectsToRaycast) {
   for (let tile of tiles) {
