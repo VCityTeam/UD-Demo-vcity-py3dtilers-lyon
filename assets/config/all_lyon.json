@@ -1,10 +1,5 @@
 {
-  "assets": {
-    "iconFolder": "../assets/icons",
-    "imageFolder": "../assets/img",
-    "logos": ["logo-liris.png", "logo-univ-lyon.png"]
-  },
-  "3DTilesLayers": [
+  "3DTiles": [
     {
       "id": "3d-tiles-layer-building",
       "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2018/Lyon_2018/tileset.json"
@@ -12,57 +7,39 @@
     {
       "id": "3d-tiles-layer-relief",
       "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2018/Lyon_2018_Relief_TileSet/tileset.json",
-      "color": "0xd0ac7f"
+      "color": "rgb(208,172,127)"
     },
     {
       "id": "3d-tiles-layer-road",
       "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2018/Lyon_2018_Roads_TileSet/tileset.json",
-      "color": "0x272727"
+      "color": "rgb(39,39,39)"
     },
     {
       "id": "3d-tiles-layer-water",
       "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2018/Lyon_2018_Water_TileSet/tileset.json",
-      "color": "0x2ACAEA"
+      "color": "rgb(42,202,234)"
     },
     {
       "id": "3d-tiles-layer-bridges",
       "url": "https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2018/Lyon_2018_Bridges_TileSet/tileset.json",
-      "color": "0x999999"
+      "color": "rgb(153,153,153)"
     }
   ],
-  "extents": {
-    "min_x": "1837500",
-    "max_x": "1848000",
-    "min_y": "5167500",
-    "max_y": "5180900"
+  "extent": {
+    "west": 1837500,
+    "east": 1848000,
+    "south": 5167500,
+    "north": 5180900
   },
-  "projection": "EPSG:3946",
+  "crs": {
+    "name": "EPSG:3946",
+    "transform": "+proj=lcc +lat_1=45.25 +lat_2=46.75 +lat_0=46 +lon_0=3 +x_0=1700000 +y_0=5200000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+  },
   "camera": {
-    "position": {
-      "x": "1843258.906522941",
-      "y": "5174805.233629481",
-      "range": "3000",
-      "heading": "-40",
-      "tilt": "17"
-    }
-  },
-  "cityObjects": {
-    "styles": {
-      "layerDefault": {
-        "materialProps": {
-          "color": "#ffa14f"
-        }
-      },
-      "selection": {
-        "materialProps": {
-          "color": "#13ddef"
-        }
-      },
-      "linkedWithDisplayedDocument": {
-        "materialProps": {
-          "color": "#4c5af7"
-        }
-      }
-    }
+    "x": 1843258.906522941,
+    "y": 5174805.233629481,
+    "range": 3000,
+    "heading": -70,
+    "tilt": 20
   }
 }
