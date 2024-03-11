@@ -13,8 +13,8 @@ jobs:
   include:
     - stage: Demo
       script:
-        - npm install && npm run travis
-    - stage: "Markdown link checks"
+        - npm install && npm run build
+    - stage: 'Markdown link checks'
       script:
         - npm install --global remark-cli remark-validate-links
         - remark -u validate-links .
