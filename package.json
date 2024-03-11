@@ -1,7 +1,7 @@
 {
-  "name": "app_name",
+  "name": "py3dtilers_demo",
   "version": "1.0.0",
-  "description": "udv game editor",
+  "description": "Py3DTilers examples",
   "main": "./src/bootstrap.js",
   "scripts": {
     "travis": "npm run eslint && npm run build",
@@ -11,14 +11,12 @@
     "build-debug": "cross-env NODE_ENV=development webpack",
     "debug": "cross-env NODE_ENV=development webpack serve"
   },
-  "author": "",
+  "author": "VCity",
   "license": "ISC",
   "dependencies": {
     "@egjs/hammerjs": "^2.0.17",
     "@ud-viz/utils_browser": "4.1.0",
     "@ud-viz/widget_3d_tiles": "4.1.0",
-    "buffer": "^6.0.3",
-    "chart.js": "^4.4.1",
     "cross-env": "7.0.3"
   },
   "devDependencies": {
