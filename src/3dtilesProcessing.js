@@ -1,19 +1,20 @@
-import { itowns, THREE } from 'ud-viz';
+import * as THREE from 'three';
+import * as itowns from 'itowns';
 
 const boundingVolumeBox = new THREE.Box3();
 const boundingVolumeSphere = new THREE.Sphere();
 
-var isReversed = false;
-var mousePosition = null;
-var useCameraPosition = false;
+let isReversed = false;
+let mousePosition = null;
+let useCameraPosition = false;
 
 // This method is a copy of the `computeNodeSSE` by iTowns
 // but is using either camera position or mouse position
 // https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js#L257
 const computeNodeSSE = (camera, node) => {
   node.distance = 0;
-  var position = null;
-  var preSSE = camera._preSSE;
+  let position = null;
+  let preSSE = camera._preSSE;
 
   if (useCameraPosition || mousePosition == null)
     position = camera.camera3D.position;
@@ -86,7 +87,7 @@ function culling(layer, camera, node, tileMatrixWorld) {
   let dy = Math.max(box_min.y - cameraPos.y, 0, cameraPos.y - box_max.y);
   let dz = Math.max(box_min.z - cameraPos.z, 0, cameraPos.z - box_max.z);
   let distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-  return distance > 5000;
+  return distance > 20000;
 }
 
 const reversedRefinement = () => {
@@ -101,29 +102,29 @@ const distanceCulling = () => {
   return itowns.process3dTilesNode(culling, itowns.$3dTilesSubdivisionControl);
 };
 
-export function reverseRefinement(tilesManagers) {
+export function reverseRefinement(c3dtilesLayers) {
   if (isReversed) {
-    tilesManagers.forEach(function (tilesManager) {
-      tilesManager.layer.update = refinement();
+    c3dtilesLayers.forEach(function (layer) {
+      layer.update = refinement();
     });
     isReversed = false;
   } else {
-    tilesManagers.forEach(function (tilesManager) {
-      tilesManager.layer.update = reversedRefinement();
+    c3dtilesLayers.forEach(function (layer) {
+      layer.update = reversedRefinement();
     });
     isReversed = true;
   }
 }
 
-export function setLayersDefaultRefinement(tilesManagers) {
-  tilesManagers.forEach(function (tilesManager) {
-    tilesManager.layer.update = refinement();
+export function setLayersDefaultRefinement(c3dtilesLayers) {
+  c3dtilesLayers.forEach(function (layer) {
+    layer.update = refinement();
   });
 }
 
-export function setLayersDistanceCulling(tilesManagers) {
-  tilesManagers.forEach(function (tilesManager) {
-    tilesManager.layer.update = distanceCulling();
+export function setLayersDistanceCulling(c3dtilesLayers) {
+  c3dtilesLayers.forEach(function (layer) {
+    layer.update = distanceCulling();
   });
 }
 

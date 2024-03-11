@@ -7,16 +7,14 @@ os: linux
 dist: focal
 language: node_js
 node_js:
-  - 14
+  - 18
 
 jobs:
   include:
     - stage: Demo
       script:
-        - npm install && npm run travis
-    - stage: "Markdown link checks"
-      language: node_js
-      node_js: 14
+        - npm install && npm run build
+    - stage: 'Markdown link checks'
       script:
         - npm install --global remark-cli remark-validate-links
         - remark -u validate-links .

@@ -1,69 +1,45 @@
-/** @format */
 const path = require('path');
-const mode = process.env.NODE_ENV;
-const debugBuild = mode === 'development';
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-let outputPath;
-if (debugBuild) {
-  outputPath = path.resolve(__dirname, 'dist/debug');
-} else {
-  outputPath = path.resolve(__dirname, 'dist/release');
+const result = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    library: 'app',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+  },
+  module: {
+    rules: [],
+  },
+  resolve: {
+    modules: ['node_modules'],
+  },
+  plugins: [],
+};
+
+if (process.env.ANALYZE) {
+  result.plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = (env) => {
-  const rules = [
-    {
-      // We also want to (web)pack the style files:
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
-    },
-    {
-      test: /\.json$/,
-      include: [path.resolve(__dirname, 'src')],
-      loader: 'raw-loader',
-    },
-    {
-      test: /\.html$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: { minimize: !debugBuild },
-        },
-      ],
-    },
-  ];
+// inject css in bundle (show_room and game_browser_template are using css)
+result.module.rules.push({
+  test: /\.css$/,
+  use: [
+    'style-loader', // Tells webpack how to append CSS to the DOM as a style tag.
+    'css-loader', // Tells webpack how to read a CSS file.
+  ],
+});
 
-  const plugins = [];
-  if (debugBuild)
-    plugins.push(
-      new HtmlWebpackPlugin({
-        title: 'Demo debug',
-        filename: 'index.html',
-      })
-    );
+// production or development
+if (process.env.NODE_ENV == 'production') {
+  result.output.path = path.resolve(process.cwd(), './dist/production');
+  result.mode = 'production';
+} else {
+  result.mode = 'development';
+  result.devtool = 'source-map';
+  result.output.path = path.resolve(process.cwd(), './dist/development');
+}
 
-  const config = {
-    mode,
-    entry: [path.resolve(__dirname, './src/index.js')],
-    output: {
-      path: outputPath,
-      filename: 'app_name.js',
-      library: 'app_name',
-      libraryTarget: 'umd',
-      umdNamedDefine: true,
-    },
-    module: {
-      rules: rules,
-    },
-    devServer: {
-      port: 8000,
-      hot: true,
-    },
-    plugins: plugins,
-  };
-
-  if (debugBuild) config.devtool = 'source-map';
-
-  return config;
-};
+module.exports = result;

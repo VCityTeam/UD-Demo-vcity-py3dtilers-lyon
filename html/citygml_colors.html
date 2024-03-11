@@ -4,35 +4,88 @@
 <html>
   <head>
     <title>3DTiles with color based on CityGML</title>
-
+    <link rel="stylesheet" href="../css/view.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <script src="../dist/release/app_name.js"></script>
-    <!-- <script src="../dist/debug/app_name.js"></script> -->
+    <div id="view_container"></div>
+    <div id="logo_div">
+      <img class="logo" src="../assets/img/logo-imu.png" />
+      <img class="logo" src="../assets/img/logo-liris.png" />
+    </div>
+    <div id="widgets_container"></div>
+    <script src="../dist/production/bundle.js"></script>
+    <!-- <script src="../dist/development/bundle.js"></script> -->
     <script type="text/javascript">
-      const app = new app_name.Templates.AllWidget();
+      app
+        .loadMultipleJSON(['../assets/config/citygml_color.json'])
+        .then((configs) => {
+          const config = configs['citygml_color'];
 
-      app.start('../assets/config/citygml_color.json').then(() => {
-        // Create the layer choice module
-        const layerChoice = new app_name.Widgets.LayerChoice(app.view3D.getLayerManager());
-        app.addModuleView('layerChoice', layerChoice);
+          const crs = config.crs.name;
+          app.proj4.default.defs(crs, config.crs.transform);
 
-        // Create the 3DTiles debugger module
-        const debug3dTilesWindow =
-          new app_name.Widgets.Debug3DTilesWindow(app.view3D.getLayerManager());
-        app.addModuleView('3dtilesDebug', debug3dTilesWindow, {
-          name: '3DTiles Debug',
+          const extent = new app.itowns.Extent(
+            crs,
+            config.extent.west,
+            config.extent.east,
+            config.extent.south,
+            config.extent.north
+          );
+
+          // ADD VIEWS
+          const camera = config.camera;
+          const placement = {
+            coord: new app.itowns.Coordinates(crs, camera.x, camera.y),
+            range: camera.range,
+            tilt: camera.tilt,
+            heading: camera.heading,
+          };
+
+          const viewDomElement = document.getElementById('view_container');
+          const view = new app.itowns.PlanarView(viewDomElement, extent, {
+            maxSubdivisionLevel: 7,
+            placement: placement,
+          });
+          app.initScene(
+            view.camera.camera3D,
+            view.mainLoop.gfxEngine.renderer,
+            view.scene
+          );
+
+          // ADD LAYERS
+          view.addLayer(app.BaseMapLayer(config.baseMap, extent));
+          view.addLayer(app.ElevationLayer(config.elevation, extent));
+
+          config['3DTiles'].forEach((conf) => {
+            const layer = app.C3DTilesLayer(conf, view);
+            app.itowns.View.prototype.addLayer.call(view, layer);
+          });
+
+          // ADD WIDGET
+          const widget = new app.C3DTiles(view, {
+            parentElement: document.getElementById('widgets_container'),
+            layerContainerClassName: 'widgets-3dtiles-layer-container',
+            c3DTFeatureInfoContainerClassName:
+              'widgets-3dtiles-feature-container',
+            urlContainerClassName: 'widgets-3dtiles-url-container',
+          });
+          widget.domElement.setAttribute('id', 'widget_3dtiles');
+
+          const contextSelection = {
+            feature: null,
+            layer: null,
+          };
+          view.domElement.onclick = (event) => {
+            app.addClick3DTilesClickEvent(
+              view,
+              widget,
+              event,
+              contextSelection
+            );
+          };
         });
-
-        // Create the CityObject module
-        let cityObjectModule = new app_name.Widgets.CityObjectModule(
-          app.view3D.getLayerManager(),
-          app.config
-        );
-        app.addModuleView('cityObjects', cityObjectModule.view);
-      });
     </script>
   </body>
 </html>
