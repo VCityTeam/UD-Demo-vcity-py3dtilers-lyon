@@ -4,7 +4,7 @@ This demo illustrate [3D Tiles](https://github.com/CesiumGS/3d-tiles) tilesets c
 
 _Note: the code in [3dtilesProcessing.js](src/3dtilesProcessing.js) is widely inspired by the [iTowns's 3D Tiles processing](https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js)._
 
-__See [online demo](https://py3dtilers-demo.vcityliris.data.alpha.grandlyon.com/).__
+__See [online demo](https://projet.liris.cnrs.fr/vcity/permalink/demo-py3dtilers.html).__
 
 ## Installation
 
@@ -29,9 +29,9 @@ python3 -m http.server
 
 The demo is now hosted on `localhost:8000`.
 
-## Refinement
+## About LoD example
 
-This demo introduces 2 new buttons allowing to change the way iTowns is processing the 3D Tiles.
+The [LoD (Levels of Detail) example](./html/all_lyon_lods.html) introduces 2 new buttons allowing to change the way iTowns is processing the 3D Tiles.
 
 ### Reverse 3DTiles process
 
