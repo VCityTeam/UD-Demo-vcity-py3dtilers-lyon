@@ -52,3 +52,45 @@ body {
 .logo {
   max-height: 80px;
 }
+
+#buttons_container {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgba(220, 220, 220, 0.6);
+  padding: 5px;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+#buttons_container > button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+#about_panel {
+  position: fixed;
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: rgba(150, 150, 150, 0.8);
+}
+
+#about_container {
+  margin: 9rem;
+  max-width: 100vw;
+  overflow: scroll;
+  background-color: rgba(220, 220, 220, 0.6);
+  padding: 2rem;
+  border-radius: 15px;
+}

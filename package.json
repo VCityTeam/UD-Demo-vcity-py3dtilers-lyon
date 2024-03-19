@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "showdown": "2.1.0",
     "style-loader": "^3.3.3",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.10.1",
