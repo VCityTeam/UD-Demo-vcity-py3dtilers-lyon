@@ -1,10 +1,12 @@
-# py3dtilers demo
+# Py3DTilers tilesets demo
 
 This demo illustrate [3D Tiles](https://github.com/CesiumGS/3d-tiles) tilesets created with [Py3DTilers](https://github.com/VCityTeam/py3dtilers). The demo is based on [UD-Viz](https://github.com/VCityTeam/UD-Viz) which is using [iTowns](https://github.com/iTowns/itowns/tree/master/src) to visualize 3D models.
 
+This work is part of the [TIGA project](https://imu.universite-lyon.fr/tiga/) and was developed by the [Labex IMU](https://imu.universite-lyon.fr/imu-fr/) and the [Liris lab](https://liris.cnrs.fr/).
+
 _Note: the code in [3dtilesProcessing.js](src/3dtilesProcessing.js) is widely inspired by the [iTowns's 3D Tiles processing](https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js)._
 
-__See [online demo](https://projet.liris.cnrs.fr/vcity/permalink/demo-py3dtilers.html).__
+**See [online demo](https://projet.liris.cnrs.fr/vcity/permalink/demo-py3dtilers.html).**
 
 ## Installation
 

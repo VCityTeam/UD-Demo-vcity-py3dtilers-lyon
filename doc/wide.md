@@ -17,3 +17,9 @@ geojson-tiler -i <path>/buildings_rhone_3946.geojson --z 0 --kd_tree_max 10000 -
 ```
 
 The tileset is available online [here](https://dataset-dl.liris.cnrs.fr/three-d-tiles-lyon-metropolis/2021/Rhone_2021_BDTOPO)
+
+## About
+
+This work is part of the [TIGA project](https://imu.universite-lyon.fr/tiga/) and was developed by the [Labex IMU](https://imu.universite-lyon.fr/imu-fr/) and the [Liris lab](https://liris.cnrs.fr/).
+
+It uses [UD-Viz](https://github.com/VCityTeam/UD-Viz) and [iTowns](https://github.com/iTowns/itowns) open source libs.
