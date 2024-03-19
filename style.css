@@ -64,6 +64,21 @@ a, h2 {
   color: var(--color-blue);
 }
 
+#logos {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  padding: 20px 50px;
+}
+
+.logo {
+  max-width: 100%;
+  margin: 10px 0px;
+}
+
 #viewer,
 #content {
   padding: 0 var(--panel-padding) var(--panel-padding) var(--panel-padding);
