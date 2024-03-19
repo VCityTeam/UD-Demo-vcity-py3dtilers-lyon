@@ -18,6 +18,20 @@
       <button id="reverse_button">Reverse 3DTiles process</button>
       <button id="switch_button">Switch position reference</button>
     </div>
+    <div id="buttons_container">
+      <button
+        id="code_button"
+        onclick="window.open('https\://github.com/VCityTeam/UD-Demo-vcity-py3dtilers-lyon/blob/master/html/all_lyon_lods.html', '_blank')"
+      >
+        <img id="code_img" src="../assets/icons/code.png" alt="Link to code" />
+      </button>
+      <button id="about_button">
+        <img id="about_img" src="../assets/icons/about.svg" alt="About panel" />
+      </button>
+    </div>
+    <div id="about_panel">
+      <div id="about_container"></div>
+    </div>
     <script src="../dist/production/bundle.js"></script>
     <!-- <script src="../dist/development/bundle.js"></script> -->
     <script type="text/javascript">
@@ -124,6 +138,26 @@
           switchButton.onclick = function () {
             useCameraPosition = app.switchPositionReference();
           };
+
+          // ADD ABOUT
+          fetch('../doc/all_lyon_lods.md')
+            .then((response) => response.text())
+            .then((text) => {
+              document.getElementById('about_container').innerHTML =
+                new app.showdown.Converter().makeHtml(text);
+              const aboutButton = document.getElementById('about_button');
+              const aboutPanel = document.getElementById('about_panel');
+              aboutButton.addEventListener('click', () => {
+                aboutPanel.style.display = 'block';
+              });
+              aboutPanel.addEventListener('click', (event) => {
+                if (
+                  event.target == aboutPanel &&
+                  aboutPanel.style.display == 'block'
+                )
+                  aboutPanel.style.display = 'none';
+              });
+            });
         });
     </script>
   </body>

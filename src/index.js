@@ -4,6 +4,7 @@ export * as THREE from 'three';
 export { BaseMapLayer, C3DTilesLayer, ElevationLayer } from './layerUtils';
 export * as proj4 from 'proj4';
 export * as itowns from 'itowns';
+export * as showdown from 'showdown';
 export { addClick3DTilesClickEvent } from './clickEvent';
 export {
   reverseRefinement,
