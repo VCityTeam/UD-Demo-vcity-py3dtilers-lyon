@@ -40,20 +40,6 @@ Explore different examples illustrating Py3DTilers' features and possible intera
 - [Lyon, with LoD](./doc/all_lyon_lods.md): Lyon city where buildings have different levels of detail.
 - [Department-wide](./doc/wide.md): Rhône department with 800k+ buildings.
 
-## About LoD example
-
-The [LoD (Levels of Detail) example](./html/all_lyon_lods.html) introduces 2 new buttons allowing to change the way iTowns is processing the 3D Tiles.
-
-### Reverse 3DTiles process
-
-This button reverse the refinement of the tiles.  
-By default, the parents tiles are displayed before the children. The children are displayed when we focus on a tile.  
-With the reversed processing, the children are displayed before their parents. The parents are displayed when we focus on a tile.  
-
-### Switch position reference
-
-This button change the reference position to refine 3D Tiles. The reference position is either the camera or the mouse position. The tiles will be refined depending on their distance with the reference position.
-
 ## Docker
 
 A [Docker](https://www.docker.com/) version of the demo also exists in [this repo](https://github.com/VCityTeam/UD-Demo-vcity-py3dtilers-lyon-docker).

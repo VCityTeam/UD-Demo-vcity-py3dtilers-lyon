@@ -2,6 +2,21 @@
 
 In this example, all models (buildings, rivers, roads, bridges and terrain) are 3D Tiles models. Buildings have different LoD (Levels of detail): one is LoD1 (simplification of models) and the other is LoA (Level of Abstraction) where different buildings are abstracted by one geometry.
 
+The example introduces 2 new buttons (described below) allowing to change the way iTowns is processing the 3D Tiles.
+
+## Reverse 3DTiles process
+
+This button reverse the refinement of the tiles.  
+By default, the parents tiles are displayed before the children. The children are displayed when we focus on a tile.  
+With the reversed processing, the children are displayed before their parents. The parents are displayed when we focus on a tile.  
+
+## Switch position reference
+
+This button change the reference position to refine 3D Tiles. The reference position is either:
+
+- the camera position: tiles refinement depends on the camera zoom.
+- the mouse position: tiles are refined when they are close to the mouse.
+
 ## How to create those tilesets
 
 All tilesets were created with [Py3DTilers](https://github.com/VCityTeam/py3dtilers), an open source toolkit to create 3D Tiles out of various geometrical formats (OBJ, GeoJSON, IFC or CityGML), using the [CityTiler](https://github.com/VCityTeam/py3dtilers/tree/master/py3dtilers/CityTiler) and the [GeojsonTiler](https://github.com/VCityTeam/py3dtilers/tree/master/py3dtilers/GeojsonTiler).
