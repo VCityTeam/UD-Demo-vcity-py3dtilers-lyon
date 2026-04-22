@@ -6,7 +6,14 @@ This work is part of the [TIGA project](https://imu.universite-lyon.fr/tiga/) an
 
 _Note: the code in [3dtilesProcessing.js](src/3dtilesProcessing.js) is widely inspired by the [iTowns's 3D Tiles processing](https://github.com/iTowns/itowns/blob/7a9457075067afa1a7aa2dc3cb72999033105ff6/src/Process/3dTilesProcessing.js)._
 
-**See [online demo](https://projet.liris.cnrs.fr/vcity/permalink/demo-py3dtilers.html).**
+| 6 3D Tile demonstrations created with Py3DTilers |
+| --- |
+| ![6 3D tile demos](https://github.com/user-attachments/assets/9212dc35-b031-4077-9fb3-bedd55489fc8) |
+
+| Interactive realtime LOD loading demonstration |
+| --- |
+| ![interactive LOD demo](https://github.com/user-attachments/assets/96320933-818c-447e-99a7-4a275694fd38) |
+
 
 ## Installation
 
